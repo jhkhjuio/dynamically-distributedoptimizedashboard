@@ -1,35 +1,17 @@
-const cycleSort = (arr) => {
-  for (let start = 0; start < arr.length - 1; start++) {
-    let item = arr[start];
-    let pos = start;
-    for (let i = start + 1; i < arr.length; i++) {
-      if (arr[i] < item) {
-        pos++;
-      }
-    }
-    if (pos === start) {
-      continue;
-    }
-    while (item === arr[pos]) {
-      pos++;
-    }
-    if (pos !== start) {
-      [item, arr[pos]] = [arr[pos], item];
-    }
-    while (pos !== start) {
-      pos = start;
-      for (let i = start + 1; i < arr.length; i++) {
-        if (arr[i] < item) {
-          pos++;
-        }
-      }
-      while (item === arr[pos]) {
-        pos++;
-      }
-      if (item !== arr[pos]) {
-        [item, arr[pos]] = [arr[pos], item];
-      }
-    }
+function isIsomorphic(s, t) {
+  if (s.length !== t.length) return false;
+  const sMap = new Map();
+  const tMap = new Map();
+  for (let i = 0; i < s.length; i++) {
+    const sChar = s[i];
+    const tChar = t[i];
+    if (
+      (sMap.has(sChar) && sMap.get(sChar) !== tChar) ||
+      (tMap.has(tChar) && tMap.get(tChar) !== sChar)
+    )
+      return false;
+    sMap.set(sChar, tChar);
+    tMap.set(tChar, sChar);
   }
-  return arr;
-};
+  return true;
+}
