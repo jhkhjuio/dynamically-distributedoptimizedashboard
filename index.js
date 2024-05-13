@@ -1,6 +1,13 @@
-function linearSearch(arr, target) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === target) return i;
+function wiggleMaxLength(nums) {
+  if (nums.length === 0) return 0;
+  let up = 1;
+  let down = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > nums[i - 1]) {
+      up = down + 1;
+    } else if (nums[i] < nums[i - 1]) {
+      down = up + 1;
+    }
   }
-  return -1;
+  return Math.max(up, down);
 }
